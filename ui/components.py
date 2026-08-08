@@ -1,5 +1,3 @@
-"""Small, presentation-only Streamlit helpers, kept separate from app.py so the
-main app file stays focused on session/graph wiring rather than markup."""
 import streamlit as st
 
 
