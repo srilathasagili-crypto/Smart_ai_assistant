@@ -1,14 +1,3 @@
-"""Google Calendar integration.
-
-Uses the OAuth "installed app" flow: the first time any calendar tool runs
-locally, a browser window opens for one-time consent, and a token is cached
-at GOOGLE_CALENDAR_TOKEN_PATH (default: token.json) for reuse after that.
-
-Deployment note: the browser consent flow needs a local browser, so it will
-NOT work the first time on Streamlit Cloud / HF Spaces. Run it once locally
-to generate token.json, then include that file as a secret/deploy-time asset.
-See README.md "Calendar setup" for details.
-"""
 import datetime
 import os
 from typing import Annotated, Any
