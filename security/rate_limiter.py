@@ -1,15 +1,3 @@
-"""Per-user rate limiting and daily quota enforcement.
-
-Two independent limits, both configurable via secrets/env (see graph/config.py):
-1. Burst limit  — RATE_LIMIT_PER_MINUTE requests per rolling 60s window.
-   Stops a single user (or a script) from hammering the Groq API.
-2. Daily budget — DAILY_REQUEST_LIMIT messages and DAILY_TOKEN_LIMIT tokens
-   per user per UTC day. Stops one user from burning your whole API quota.
-
-Call check_and_record_request(user_id) once per incoming user message,
-BEFORE graph.invoke(). It raises RateLimitExceeded if the user is over
-budget, otherwise it records the attempt and lets the caller proceed.
-"""
 import time
 from datetime import datetime, timezone
 
@@ -21,8 +9,6 @@ logger = get_logger("security.rate_limiter")
 
 
 class RateLimitExceeded(Exception):
-    """Raised when a user is over their per-minute or per-day request/token budget.
-    app.py catches this and shows the message as a friendly chat reply."""
 
 
 def _today() -> str:
