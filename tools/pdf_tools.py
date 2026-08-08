@@ -1,12 +1,3 @@
-"""PDF analysis tools.
-
-Design: app.py extracts text from the uploaded PDF (see tools/pdf_extract.py)
-and stores it in the graph's state as `pdf_context`. These tools read that
-state field via LangGraph's InjectedState — meaning the LLM never has to pass
-the PDF text as a tool argument (it can't see it, and doesn't need to); it
-just calls the tool with a question, and the actual text is injected
-automatically from the current conversation's state.
-"""
 from typing import Annotated
 
 from langchain_core.tools import tool
