@@ -11,7 +11,7 @@ See README.md "Calendar setup" for details.
 """
 import datetime
 import os
-from typing import Annotated
+from typing import Annotated, Any
 
 from langchain_core.tools import tool
 from langgraph.prebuilt import InjectedState
