@@ -1,18 +1,3 @@
-"""User authentication for the public multi-user app.
-
-Primary flow — Google Sign-In:
-Uses Streamlit's native OpenID Connect support (st.login/st.user/st.logout),
-available in streamlit>=1.42. Requires an `[auth]` section in secrets.toml
-with a Google OAuth client — see .streamlit/secrets.toml.example and
-README.md "Authentication setup" for the exact steps.
-
-Fallback — dev mode:
-If `[auth]` isn't configured (e.g. you're just testing locally before setting
-up a Google Cloud OAuth client), the app falls back to the old "type your
-name" behavior — clearly labeled as insecure, and NOT something to ship
-publicly. This exists purely so the app doesn't crash before you've finished
-the Google Cloud setup step.
-"""
 import streamlit as st
 
 from graph.config import ADMIN_EMAILS, AUTH_CONFIGURED
@@ -23,12 +8,7 @@ logger = get_logger("auth")
 
 
 def require_login() -> dict:
-    """Blocks the rest of the page (via st.stop()) until a user is identified.
-
-    Returns: {'user_id': str, 'email': str | None, 'name': str, 'is_admin': bool}
-    'user_id' is what the rest of the app (memory, rate limiting, usage
-    tracking, graph state) uses as the stable per-user key.
-    """
+  
     if AUTH_CONFIGURED:
         return _require_google_login()
     return _require_dev_login()
