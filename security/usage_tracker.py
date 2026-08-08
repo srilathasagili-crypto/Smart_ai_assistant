@@ -1,11 +1,3 @@
-"""Per-user token consumption tracking.
-
-Called from graph/nodes.py after every Groq LLM call (there can be more than
-one per user turn, if the model makes tool calls). Accumulates into the same
-`daily_usage` table that security/rate_limiter.py reads for quota checks, and
-also logs an immutable row per call into `usage_events` for auditing/debugging
-("why did this user's usage spike on Tuesday").
-"""
 from datetime import datetime, timezone
 
 from graph.logger import get_logger
