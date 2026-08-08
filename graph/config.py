@@ -9,12 +9,7 @@ logger = get_logger("config")
 
 
 def get_env_var(key: str, required: bool = True):
-    """Fetch a config value from Streamlit secrets first, then the environment.
-
-    Set required=False for optional integrations (news, web search, calendar, ...)
-    so the app can still start and run with those features simply disabled,
-    instead of crashing at import time.
-    """
+   
     # Streamlit Cloud / local .streamlit/secrets.toml
     try:
         if key in st.secrets:
@@ -81,11 +76,7 @@ DAILY_TOKEN_LIMIT = int(get_env_var("DAILY_TOKEN_LIMIT", required=False) or 100_
 
 
 def validate_config() -> dict:
-    """Return a {feature_name: is_configured} map, and log a one-time startup summary.
-
-    Used by the UI to show tool status in the sidebar, and by app startup to warn
-    about disabled features without stopping the app.
-    """
+    
     status = {
         "Groq LLM": bool(GROQ_API_KEY),
         "Weather": bool(OPENWEATHER_API_KEY),
