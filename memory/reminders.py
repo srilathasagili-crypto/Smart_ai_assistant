@@ -1,14 +1,3 @@
-"""Persistent reminder storage.
-
-Note on "notify when due" (see tools/reminders_tool.py and app.py):
-Streamlit apps only run code while a user has the page open and is interacting
-with it — there is no background process on Streamlit Cloud / HF Spaces free
-tiers. So "notification" here means: every time the app reruns (page load or
-a new chat message), we check for reminders that are now due and haven't been
-shown yet, and surface them as a banner. This is honest, zero-infra behavior.
-For true push notifications you'd need an external scheduler (e.g. a cron job
-calling a notification webhook) — see README "Future improvements".
-"""
 import os
 import sqlite3
 import tempfile
