@@ -1,13 +1,3 @@
-"""Long-term, cross-session user memory.
-
-This is separate from memory/chat_history.py on purpose:
-- chat_history.py (SqliteSaver) stores the *message log* for a thread_id.
-- user_profile.py stores durable *facts about the user* (name, preferences,
-  favourite technologies) keyed by a stable user_id, independent of any one
-  conversation thread.
-
-Both use SQLite in the same temp directory so no new infra is required.
-"""
 import json
 import os
 import sqlite3
