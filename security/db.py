@@ -1,18 +1,3 @@
-"""Central SQLite database for users, rate-limiting, and per-user API usage tracking.
-
-Why a new DB instead of reusing memory/user_profile.py's SQLite file:
-- That file lives under tempfile.gettempdir() (wiped often, per-process).
-- This one lives under ./data/app.db so it's easy to mount as a persistent
-  volume in production (see README.md "Production architecture").
-
-IMPORTANT — Streamlit Community Cloud has an EPHEMERAL filesystem: this file
-(and everything in it — users, usage history, rate-limit counters) is wiped
-whenever the app reboots/redeploys/sleeps. That's fine for testing, but for a
-real public deployment, replace the sqlite3 calls in this file with a managed
-Postgres database (Supabase / Neon / Railway are free-tier friendly). Every
-function signature below (upsert_user, record_request, etc.) can stay the
-same — only _connect()/get_conn() need to change to use psycopg2/SQLAlchemy.
-"""
 import os
 import sqlite3
 import threading
