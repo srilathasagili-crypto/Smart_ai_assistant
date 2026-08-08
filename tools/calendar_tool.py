@@ -16,9 +16,11 @@ from typing import Annotated, Any
 from langchain_core.tools import tool
 from langgraph.prebuilt import InjectedState
 
-from graph.config import GOOGLE_CALENDAR_CREDENTIALS_PATH, GOOGLE_CALENDAR_TOKEN_PATH
+from graph.config import (
+    GOOGLE_CALENDAR_CREDENTIALS_PATH,
+    GOOGLE_CALENDAR_TOKEN_PATH,
+)
 from graph.logger import get_logger
-from graph.state import AssistantState
 
 logger = get_logger("tools.calendar")
 
@@ -68,7 +70,7 @@ def add_calendar_event(
     title: str,
     start_iso: str,
     end_iso: str,
-    state: Annotated[AssistantState, InjectedState] = None,
+    state: Annotated[Any, InjectedState] = None,
 ) -> str:
     """Create a Google Calendar event. start_iso and end_iso must be ISO 8601
     datetimes with timezone, e.g. '2026-08-05T10:00:00+05:30'."""
@@ -90,7 +92,7 @@ def add_calendar_event(
 
 
 @tool
-def list_today_events(state: Annotated[AssistantState, InjectedState] = None) -> str:
+def list_today_events(state: Annotated[Any, InjectedState] = None) -> str:
     """List today's events on the user's primary Google Calendar."""
     if not _is_admin(state):
         return _ADMIN_ONLY_MSG
@@ -122,7 +124,7 @@ def list_today_events(state: Annotated[AssistantState, InjectedState] = None) ->
 
 
 @tool
-def delete_calendar_event(event_id: str, state: Annotated[AssistantState, InjectedState] = None) -> str:
+def delete_calendar_event(event_id: str, state: Annotated[Any, InjectedState] = None) -> str:
     """Delete a Google Calendar event by its event_id (shown in brackets by list_today_events)."""
     if not _is_admin(state):
         return _ADMIN_ONLY_MSG
