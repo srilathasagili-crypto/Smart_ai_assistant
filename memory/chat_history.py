@@ -1,14 +1,3 @@
-"""Persistent LangGraph checkpointing for conversation threads.
-
-This is separate from memory/user_profile.py on purpose:
-- chat_history.py (SqliteSaver) stores the *message log* for a thread_id, so a
-  conversation can be resumed (e.g. after a Streamlit rerun or app restart)
-  without losing context.
-- user_profile.py stores durable *facts about the user* (name, preferences),
-  keyed by a stable user_id, independent of any one conversation thread.
-
-Both use SQLite in the same temp directory so no new infra is required.
-"""
 import os
 import sqlite3
 import tempfile
@@ -26,11 +15,7 @@ _checkpointer: SqliteSaver | None = None
 
 
 def get_checkpointer() -> SqliteSaver:
-    """Builds (and caches, per-process) a SQLite-backed LangGraph checkpointer.
-
-    Used by graph/builder.py to compile the graph with persistent, per-thread
-    conversation memory.
-    """
+   
     global _checkpointer
     if _checkpointer is None:
         os.makedirs(_DB_DIR, exist_ok=True)
@@ -43,6 +28,5 @@ def get_checkpointer() -> SqliteSaver:
 
 
 def get_thread_config(thread_id: str) -> dict:
-    """Returns the LangGraph config dict that scopes graph.invoke() / update_state()
-    calls to a specific conversation thread."""
+   
     return {"configurable": {"thread_id": thread_id}}
