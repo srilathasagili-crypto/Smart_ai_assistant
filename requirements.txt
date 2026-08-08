@@ -1,0 +1,32 @@
+# --- existing (unchanged) ---
+langchain>=1.3,<2.0
+langgraph>=1.2,<2.0
+langchain-groq>=1.1,<2.0
+langgraph-checkpoint-sqlite>=3.0.1,<4.0
+python-dotenv>=1.1.0
+# Bumped from 1.40.2 -> needs >=1.42 for native st.login()/st.user Google OAuth
+# (see auth/authentication.py). Nothing else about the Streamlit API changed.
+streamlit>=1.42.0,<2.0
+fastmcp>=3.4.5,<4.0
+requests>=2.32
+pydantic>=2.11,<3
+
+# --- new: authentication (st.login/st.user, streamlit>=1.42) ---
+Authlib>=1.3.2,<2.0
+
+# --- new: web search ---
+langchain-tavily>=0.2,<1.0   # used if TAVILY_API_KEY is set
+ddgs>=9.0                    # free DuckDuckGo fallback, no API key needed
+
+# --- new: calendar ---
+google-api-python-client>=2.140,<3.0
+google-auth-httplib2>=0.2,<1.0
+google-auth-oauthlib>=1.2,<2.0
+
+# --- new: PDF analysis ---
+pypdf>=5.0,<6.0
+
+# --- new: voice assistant ---
+streamlit-mic-recorder>=0.0.8
+groq>=0.11,<1.0              # used directly for Whisper speech-to-text
+gTTS>=2.5,<3.0
