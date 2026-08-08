@@ -4,7 +4,7 @@ import smtplib
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from typing import Annotated, Optional
+from typing import Annotated
 
 from langchain_core.tools import tool
 from langgraph.prebuilt import InjectedState
@@ -33,7 +33,7 @@ def send_email(
     subject: str,
     body: str,
     attachment_path: str = "",
-    state: Annotated[Optional[AssistantState], InjectedState] = None,
+    state: Annotated[AssistantState, InjectedState] = None,
 ) -> str:
     """Send an email via Gmail. 'to' must be a valid email address.
     attachment_path is optional — pass a file path (e.g. from an uploaded file) to attach it.
