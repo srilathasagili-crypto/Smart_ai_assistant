@@ -165,6 +165,8 @@ def speak(text: str):
 def main():
     # Authentication gate — everything below only runs for a signed-in user.
     # See auth/authentication.py for the Google Sign-In / dev-mode logic.
+    st.write("LOGIN STATUS:", st.user.is_logged_in)
+    st.write("USER:", st.user)
     identity = require_login()
     user_id = identity["user_id"]
     is_admin = identity["is_admin"]
