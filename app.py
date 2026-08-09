@@ -2,6 +2,7 @@ import uuid
 
 import streamlit as st
 from langchain_core.messages import HumanMessage, AIMessage
+from graph.config import validate_config, AUTH_CONFIGURED
 
 from auth.authentication import require_login
 from graph.builder import build_graph
@@ -167,6 +168,7 @@ def main():
     # See auth/authentication.py for the Google Sign-In / dev-mode logic.
     st.write("LOGIN STATUS:", st.user.is_logged_in)
     st.write("USER:", st.user)
+    st.write("AUTH CONFIGURED:", AUTH_CONFIGURED)
     identity = require_login()
     user_id = identity["user_id"]
     is_admin = identity["is_admin"]
